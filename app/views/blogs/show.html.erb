@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<img src="<%= @blog.image %>" alt="">
+
 <p>
   <strong>User:</strong>
-  <%= @blog.user.first_name %>
+  <%= @blog.user.fullname %>
 </p>
 
 <p>
@@ -15,7 +17,21 @@
   <%= @blog.body %>
 </p>
 
-<img src="<%= @blog.image %>" alt="">
+<%= link_to 'Edit Blog', edit_blog_path(@blog) %> |
+<%= link_to 'Back to Blogs', blogs_path %>
 
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+<p>
+  <strong>Comments:</strong>
+  <% @blog.comments.each do |comment| %>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <h6><%= comment.body %></h6>
+        <br>
+        <small><%= link_to 'Edit Comment', edit_blog_comment_path(@blog,comment)%></small>
+      </li>
+    </ul>
+  <% end %>
+</p>
+
+<br>
+<%= link_to 'New Comment', new_blog_comment_path(@blog) %>

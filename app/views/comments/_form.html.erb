@@ -15,7 +15,7 @@
     <%= form.collection_select(:user_id,User.all,:id,:fullname, :class => 'form-control') %>
   </div>
 
-    <%= form.number_field :blog_id, value: @blog.id%>
+    <%= form.number_field :blog_id, :type => 'hidden', value: @blog.id%>
 
 
   <div class="field">
