@@ -25,6 +25,7 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @blog = Blog.find(params[:blog_id])
+    session[:return_to] ||= request.referer
   end
 
   # POST /comments
@@ -34,6 +35,7 @@ class CommentsController < ApplicationController
     @blog = Blog.find(params[:blog_id])
 
     respond_to do |format|
+      @blog = Blog.find(params[:blog_id])
       if @comment.save
         # format.html { redirect_to blog_comments_path, notice: 'Comment was successfully created.' }
         format.html { redirect_to @blog, notice: 'Comment was successfully created.' }
@@ -48,9 +50,10 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
+    @blog = Blog.find(params[:blog_id])
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @blog, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit }
