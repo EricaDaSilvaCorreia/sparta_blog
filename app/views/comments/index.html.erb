@@ -2,7 +2,7 @@
 
 <h1>Comments</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>User</th>
@@ -15,12 +15,12 @@
   <tbody>
     <% @comments.each do |comment| %>
       <tr>
-        <td><%= comment.user_id %></td>
+        <td><%= comment.user.fullname %></td>
         <td><%= comment.blog_id %></td>
         <td><%= comment.body %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', blog_comment_url(@blog, comment) %></td>
+        <td><%= link_to 'Edit', edit_blog_comment_path(@blog, comment) %></td>
+        <td><%= link_to 'Destroy', blog_comment_url(@blog, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Comment', new_comment_path %>
+<%= link_to 'New Comment', new_blog_comment_path %>
