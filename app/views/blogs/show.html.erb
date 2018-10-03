@@ -2,7 +2,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @blog.user_id %>
+  <%= @blog.user.first_name %>
 </p>
 
 <p>
@@ -15,10 +15,7 @@
   <%= @blog.body %>
 </p>
 
-<p>
-  <strong>Image:</strong>
-  <%= @blog.image %>
-</p>
+<img src="<%= @blog.image %>" alt="">
 
 <%= link_to 'Edit', edit_blog_path(@blog) %> |
 <%= link_to 'Back', blogs_path %>
