@@ -18,11 +18,27 @@
 <p>
   <strong>Blogs:</strong>
   <% @user.blogs.each do |blog|%>
-    <ul>
-      <%= link_to blog do %>
-          <li><%= blog.title %></li>
+  <ul class="list-group">
+    <%= link_to blog do %>
+    <li class="list-group-item"><%= blog.title %></li>
+    <% end %>
+  </ul>
+  <% end %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <% @user.comments.each do |comment|%>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <h5>Blog : <%= comment.blog.title %></h5>
+      <%= link_to blog_url(comment.blog_id) do %>
+      <p><%= comment.body %></p>
       <% end %>
-    </ul>
+      <br>
+      <small><%= link_to 'Edit Comment', edit_blog_comment_path(comment.blog_id, comment)%></small>
+    </li>
+  </ul>
   <% end %>
 </p>
 

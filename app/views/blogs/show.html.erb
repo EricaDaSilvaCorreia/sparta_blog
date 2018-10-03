@@ -25,9 +25,14 @@
   <% @blog.comments.each do |comment| %>
     <ul class="list-group">
       <li class="list-group-item">
+        <%= link_to user_url(comment.user_id, comment) do %>
+        <h5><%= comment.user.fullname%></h5>
+        <% end %>
+        <br>
         <h6><%= comment.body %></h6>
         <br>
         <small><%= link_to 'Edit Comment', edit_blog_comment_path(@blog,comment)%></small>
+        <small><%= link_to 'Delete Comment', blog_comment_url(@blog, comment), method: :delete, data: { confirm: 'Are you sure?' } %></small>
       </li>
     </ul>
   <% end %>
